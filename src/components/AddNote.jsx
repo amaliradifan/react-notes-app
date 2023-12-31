@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Collapse, Card, Button, CardBody } from "@material-tailwind/react";
 import { AddNoteForm } from "./AddNoteForm";
+import PropTypes from "prop-types";
 
 function AddNote({ addNote }) {
 	const [open, setOpen] = useState(false);
@@ -25,5 +26,9 @@ function AddNote({ addNote }) {
 		</div>
 	);
 }
+
+AddNote.propTypes = {
+	addNote: PropTypes.func.isRequired,
+};
 
 export default AddNote;

@@ -1,6 +1,7 @@
 import React from "react";
 import ButtonGroup from "@mui/material/ButtonGroup";
 import Button from "@mui/material/Button";
+import PropTypes from "prop-types";
 
 export default function ArchiveOption({ isArchived, onToggle }) {
 	return (
@@ -33,3 +34,8 @@ export default function ArchiveOption({ isArchived, onToggle }) {
 		</div>
 	);
 }
+
+ArchiveOption.propTypes = {
+	isArchived: PropTypes.bool.isRequired,
+	onToggle: PropTypes.func.isRequired,
+};

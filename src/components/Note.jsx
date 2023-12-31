@@ -10,13 +10,14 @@ import {
 import { showFormattedDate } from "../utils";
 import ArchiveOutlinedIcon from "@mui/icons-material/ArchiveOutlined";
 import UnarchiveIcon from "@mui/icons-material/Unarchive";
+import PropTypes from "prop-types";
 
 export default function Note({ note, index, deleteNote, archiveNote }) {
 	const animationDelay = `${index * 0.1}s`;
 
 	return (
 		<Card
-			className={`animate__animated animate__fadeInDown my-3 w-10/12`}
+			className={`animate__animated animate__fadeInDown`}
 			style={{ animationDelay }}
 		>
 			<CardBody>
@@ -28,7 +29,10 @@ export default function Note({ note, index, deleteNote, archiveNote }) {
 			<CardFooter className="pt-0 flex items-center justify-between">
 				<div>
 					<Button
-						onClick={archiveNote}
+						onClick={(e) => {
+							e.preventDefault();
+							archiveNote();
+						}}
 						className="bg-gradient-to-r from-cyan-500 to-blue-500"
 					>
 						{note.archived ? (
@@ -40,7 +44,10 @@ export default function Note({ note, index, deleteNote, archiveNote }) {
 					</Button>
 					<button
 						className="text-red-500 ms-5 hover:underline "
-						onClick={deleteNote}
+						onClick={(e) => {
+							e.preventDefault();
+							deleteNote();
+						}}
 					>
 						Delete
 					</button>
@@ -52,3 +59,10 @@ export default function Note({ note, index, deleteNote, archiveNote }) {
 		</Card>
 	);
 }
+
+Note.propTypes = {
+	note: PropTypes.object.isRequired,
+	index: PropTypes.number.isRequired,
+	archiveNote: PropTypes.func.isRequired,
+	deleteNote: PropTypes.func.isRequired,
+};

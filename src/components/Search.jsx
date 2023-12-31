@@ -1,6 +1,7 @@
 import React from "react";
 import { Input } from "@material-tailwind/react";
 import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
+import PropTypes from "prop-types";
 
 export default function Search({ searchTerm, onSearchChange }) {
 	return (
@@ -14,3 +15,8 @@ export default function Search({ searchTerm, onSearchChange }) {
 		</div>
 	);
 }
+
+Search.propTypes = {
+	searchTerm: PropTypes.string.isRequired,
+	onSearchChange: PropTypes.func.isRequired,
+};

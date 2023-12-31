@@ -6,6 +6,7 @@ import {
 	Button,
 	Typography,
 } from "@material-tailwind/react";
+import PropTypes from "prop-types";
 
 export function AddNoteForm({ addNote }) {
 	const [formData, setFormData] = useState({
@@ -94,3 +95,7 @@ export function AddNoteForm({ addNote }) {
 		</Card>
 	);
 }
+
+AddNoteForm.propTypes = {
+	addNote: PropTypes.func.isRequired,
+};
