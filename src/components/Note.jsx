@@ -24,7 +24,10 @@ export default function Note({ note, index, deleteNote, archiveNote }) {
 				<Typography variant="h5" color="blue-gray" className="mb-2">
 					{note.title}
 				</Typography>
-				<Typography>{note.body}</Typography>
+				<Typography style={{ wordWrap: "break-word" }}>
+					{note.body.split("").splice(0, 200)}
+					{note.body.length > 200 ? "..." : ""}
+				</Typography>
 			</CardBody>
 			<CardFooter className="pt-0 flex items-center justify-between">
 				<div>

@@ -6,17 +6,20 @@ import PropTypes from "prop-types";
 
 export default function ShowNote({ note }) {
 	return (
-		<CardBody className="mx-auto text-center">
+		<CardBody
+			className="mx-auto text-center max-w-full"
+			style={{ wordWrap: "break-word" }}
+		>
 			<Typography variant="h3" color="blue-gray" className="mb-2">
 				{note.title}
 			</Typography>
 
-			<Typography className="flex mx-auto w-10/12 text-center">
+			<Typography className="flex mx-auto w-10/12 justify-between">
 				<span className="mr-auto">{note.archived ? "Archived" : ""}</span>
 				<span className="ml-auto">{showFormattedDate(note.createdAt)}</span>
 			</Typography>
 
-			<Typography className="w-8/12 mx-auto my-10">{note.body}</Typography>
+			<Typography className="w-10/12 mx-auto my-10">{note.body}</Typography>
 			<CardFooter>
 				<Link to="/" className="hover:underline text-red-300">
 					Back

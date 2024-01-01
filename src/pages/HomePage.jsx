@@ -1,15 +1,22 @@
 import Notes from "../components/Notes";
 import { getInitialData } from "../utils/index";
 import AddNote from "../components/AddNote";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Search from "../components/Search";
 import ArchiveOption from "../components/ArchiveOption";
 import ContainerComponents from "../components/ContainerComponents";
 
 function HomePage() {
-	const [notes, setNotes] = useState(getInitialData());
+	const [notes, setNotes] = useState(() => {
+		const storedNotes = localStorage.getItem("notes");
+		return storedNotes ? JSON.parse(storedNotes) : getInitialData();
+	});
 	const [searchTerm, setSearchTerm] = useState("");
 	const [isArchived, setIsArchived] = useState(false);
+
+	useEffect(() => {
+		localStorage.setItem("notes", JSON.stringify(notes));
+	}, [notes]);
 
 	const archivedNotes = notes.filter((note) => note.archived === isArchived);
 	const handleArchive = () => {
@@ -24,27 +31,29 @@ function HomePage() {
 
 	const addNote = (note) => {
 		setNotes((currNote) => {
-			return [
+			const updatedNotes = [
 				{
 					...note,
-					id: new Date().toISOString(),
+					id: Date.now(),
 					createdAt: new Date().toISOString(),
 					archived: false,
 				},
 				...currNote,
 			];
+			return updatedNotes;
 		});
 	};
 
 	const deleteNote = (id) => {
 		setNotes((prevNotes) => {
-			return prevNotes.filter((n) => n.id !== id);
+			const updatedNotes = prevNotes.filter((n) => n.id !== id);
+			return updatedNotes;
 		});
 	};
 
 	const archiveNote = (id) => {
 		setNotes((prevNotes) => {
-			return prevNotes.map((note) => {
+			const updatedNotes = prevNotes.map((note) => {
 				if (note.id === id) {
 					return {
 						...note,
@@ -53,6 +62,7 @@ function HomePage() {
 				}
 				return note;
 			});
+			return updatedNotes;
 		});
 	};
 

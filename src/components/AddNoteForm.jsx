@@ -21,12 +21,11 @@ export function AddNoteForm({ addNote }) {
 				...prevData,
 				[name]: value,
 			}));
-		} else if (name === "body") {
-			setFormData((prevData) => ({
-				...prevData,
-				[name]: value,
-			}));
 		}
+		setFormData((prevData) => ({
+			...prevData,
+			[name]: value,
+		}));
 	};
 
 	const handleSubmit = (e) => {

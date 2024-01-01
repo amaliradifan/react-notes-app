@@ -5,7 +5,10 @@ import { useState } from "react";
 import { getInitialData } from "../utils";
 
 function NoteDetails() {
-	const [notes, setNotes] = useState(getInitialData());
+	const [notes, setNotes] = useState(() => {
+		const storedNotes = localStorage.getItem("notes");
+		return storedNotes ? JSON.parse(storedNotes) : getInitialData();
+	});
 	const { id } = useParams();
 	const getNote = (id) => {
 		if (!id) {
